@@ -92,24 +92,24 @@ Data format to be added:
    cd /etc/nginx/sites-available
    nano default
 
-   Update the location part in the default file:
-   ```bash
-   location / {
-   proxy_pass http://localhost:3000;
-   proxy_http_version 1.1;
-   proxy_set_header Upgrade $http_upgrade;
-   proxy_set_header Connection 'upgrade';
-   proxy_set_header Host $host;
-   proxy_cache_bypass $http_upgrade;
-   }
+10. Update the location part in the default file:
+    ```bash
+    location / {
+    proxy_pass http://localhost:3000;
+    proxy_http_version 1.1;
+    proxy_set_header Upgrade $http_upgrade;
+    proxy_set_header Connection 'upgrade';
+    proxy_set_header Host $host;
+    proxy_cache_bypass $http_upgrade;
+    }
 
-   Restart Nginx:
-   ```bash
-   sudo systemctl restart nginx
+    Restart Nginx:
+    ```bash
+    sudo systemctl restart nginx
 
-10. Access the public IP of the backend instance. Ensure that the reverse proxy to the Nginx server is functioning.
+11. Access the public IP of the backend instance. Ensure that the reverse proxy to the Nginx server is functioning.
 
-### Frontend Setup
+# Frontend Setup
 
 1. Connect to the frontend EC2 instance via SSH.
 2. Update the URL in src/url.js to point to the backend instance's public IP.
@@ -125,41 +125,41 @@ Data format to be added:
 5. Install and configure Nginx for reverse proxy similar to the backend instance.
 6. Access the public IP of the frontend instance. Ensure that the reverse proxy to the Nginx server is functioning.
 
-###   Domain Purchase, DNS Configuration, and CloudFlare Setup
+#   Domain Purchase, DNS Configuration, and CloudFlare Setup
 
-# 1. Domain Purchase:
+## 1. Domain Purchase:
    * Visit a domain registrar like GoDaddy.
    * Search for your desired domain name and complete the purchase process.
-# 2. DNS Configuration at Registrar:
+## 2. DNS Configuration at Registrar:
    * Log in to your domain registrar’s dashboard.
    * Navigate to the DNS management section.
    * Add an A record for the frontend server's IP.
    * Add another A record for the backend server's IP with a subdomain (e.g., api).
-# 3. Setting up CloudFlare:
+## 3. Setting up CloudFlare:
    * Register and log in to Cloudflare.
    * Add your domain to CloudFlare and select the free plan.
    * Change your domain’s nameservers to CloudFlare’s nameservers.
    * Add A records for the frontend and backend servers in CloudFlare DNS settings.
-# 4. Updating Frontend Application:
+## 4. Updating Frontend Application:
   *  Update the frontend/src/url.js file to use the new backend API URL (http://api.[your domain name]).
   *  Restart and Verification:
   *  Restart both frontend and backend applications.
   *  Access your domain via HTTP and verify that the application functions correctly.
     
-###  Implementing SSL with Certbot
-# 1. Certbot Installation:
+#  Implementing SSL with Certbot
+## 1. Certbot Installation:
    * Ensure Snapd is installed and up to date.
    * Remove any existing Certbot installations.
    * Install Certbot using snap.
-# 2. Obtaining SSL Certificate:
+## 2. Obtaining SSL Certificate:
    * Run Certbot with the Nginx plugin.
    * Follow the on-screen instructions to select your domain and obtain the certificate.
-# 3. Testing and Restarting Nginx:
+## 3. Testing and Restarting Nginx:
    * Test the Nginx configuration for syntax errors.
    * Restart Nginx to apply the new configuration.
-# 4. Verification:
+## 4. Verification:
    * Access your application using https://[your-domain-name] to verify that SSL is working correctly.
-# 5. Updating Frontend Configuration:
+## 5. Updating Frontend Configuration:
    * Update the frontend/src/url.js file to use HTTPS for the backend URL.
    * Restart the frontend application to apply the change.
  
