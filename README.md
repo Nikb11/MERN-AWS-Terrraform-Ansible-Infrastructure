@@ -103,11 +103,11 @@ Data format to be added:
     proxy_cache_bypass $http_upgrade;
     }
 
-    Restart Nginx:
+11. Restart Nginx:
     ```bash
     sudo systemctl restart nginx
 
-11. Access the public IP of the backend instance. Ensure that the reverse proxy to the Nginx server is functioning.
+12. Access the public IP of the backend instance. Ensure that the reverse proxy to the Nginx server is functioning.
 
 # Frontend Setup
 
